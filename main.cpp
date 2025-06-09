@@ -57,7 +57,7 @@ struct TestCase {
     long long expectedDistance;
 };
 
-// ZMODYFIKOWANA FUNKCJA TESTUJĄCA
+// ZMODYFIKOWANA FUNKCJA TESTUJĄCA BEZ KOLORÓW
 void runAllTests() {
     std::cout << "\n--- Uruchamianie rozszerzonego zestawu testow algorytmu Dijkstry ---\n";
     const long long infinity = std::numeric_limits<long long>::max();
@@ -93,7 +93,7 @@ void runAllTests() {
         std::cout << "  - Oczekiwany wynik: " << (test.expectedDistance == infinity ? "Brak sciezki" : std::to_string(test.expectedDistance)) << "\n";
         std::cout << "--------------------------------------------------\n";
 
-        // Wykonanie testu (logika bez zmian)
+        // Wykonanie testu
         std::vector<std::vector<Edge>> adjacencyList(test.numVertices + 1);
         for (const auto& edgeTuple : test.edges) {
             adjacencyList[std::get<0>(edgeTuple)].push_back({std::get<1>(edgeTuple), std::get<2>(edgeTuple)});
@@ -105,10 +105,10 @@ void runAllTests() {
         
         // Wyświetlenie wyniku testu
         if (actualDistance == test.expectedDistance) {
-            std::cout << "WYNIK: \033[1;32mPASS\033[0m\n"; // Zielony kolor
+            std::cout << "WYNIK: PASS\n";
             passedCount++;
         } else {
-            std::cout << "WYNIK: \033[1;31mFAIL\033[0m\n"; // Czerwony kolor
+            std::cout << "WYNIK: FAIL\n";
             std::cout << "   -> Otrzymano: " << (actualDistance == infinity ? "Brak sciezki" : std::to_string(actualDistance)) << "\n";
         }
     }
@@ -118,9 +118,9 @@ void runAllTests() {
     std::cout << "==================================================\n";
     std::cout << "Zaliczono " << passedCount << " z " << testsToRun.size() << " testow.\n";
     if (passedCount == testsToRun.size()) {
-        std::cout << "\033[1;32mWszystkie testy zakonczone sukcesem! Algorytm dziala poprawnie.\033[0m\n";
+        std::cout << "Wszystkie testy zakonczone sukcesem! Algorytm dziala poprawnie.\n";
     } else {
-        std::cout << "\033[1;31mNiektore testy nie powiodly sie. Sprawdz logi powyzej.\033[0m\n";
+        std::cout << "Niektore testy nie powiodly sie. Sprawdz logi powyzej.\n";
     }
     std::cout << "==================================================\n\n";
 }
